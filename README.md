@@ -385,11 +385,15 @@ Example
 
 ```json
 {
-    status: http_status_code,
+    status: 200,
     message: "message related to success or error",
-    payload: that's the actual response data given above
+    payload: {}
 }
 ```
+
+status is HTTP STATUS CODES ex- 200, 400, 404, 501 etc
+
+payload can be json object or array of json object (depends on request)
 
 #### Example
 
