@@ -578,7 +578,7 @@ response
 ```
 
 
-# Delete rows
+# Delete rows (only admin api supports)
 
 #### to delete any above data just send ``DELETE`` request with query parameter ``?id=asesad,qewesad,wq3sdc`` id must be seperated by comma if there is multiple deletion.
 
