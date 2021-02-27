@@ -394,7 +394,7 @@ response data
 
 ```json
 {
-   "id"; "unique uuid",
+   "id": "unique uuid",
    "createdAt": "2021-02-27T06:30:35.509Z"
 }
 ```
