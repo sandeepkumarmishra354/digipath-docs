@@ -385,9 +385,9 @@ Example
 
 ```json
 {
-    status: 200,
-    message: "message related to success or error",
-    payload: {}
+    "status": 200,
+    "message": "message related to success or error",
+    "payload": {}
 }
 ```
 
@@ -402,9 +402,9 @@ payload can be json object or array of json object (depends on request)
 
 ```json
 {
-    status: 200,
-    message: "success",
-    payload: {
+    "status": 200,
+    "message": "success",
+    "payload": {
         "id":"unique uuid",
         "createdAt":"2021-02-27T06:30:35.509Z",
         "updatedAt":"2021-02-27T06:30:35.509Z",
