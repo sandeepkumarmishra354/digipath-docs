@@ -1,4 +1,4 @@
-# digipath-docs
+# digipath-docs Admin
 
 ### Get user list
 
@@ -371,8 +371,214 @@ response
 ]
 ```
 
+# digipath-docs Mobile App
 
-## Delete rows
+#### Authentication
+
+`POST /api/v1/public/auth/register`
+request data
+
+```json
+{
+    "firstName": "first name",
+    "lastName": "last name",
+    "contactNumber": "1234567890",
+    "contactNumberOp": "optional",
+    "department": "department uuid",
+    "designation": "employee",
+    "email": "address@email.com"
+}
+```
+
+response data
+
+```json
+{
+   "id"; "unique uuid",
+   "createdAt": "2021-02-27T06:30:35.509Z"
+}
+```
+
+`POST /api/v1/public/auth/send-otp?phone=1234567890`
+send phone as query parameter
+
+response data
+
+```json
+{
+   "otpToken": "otp session token",
+   "status": "pending || verified || expired",
+   "phone": "1234567890",
+   "requestId": "sms request id"
+}
+```
+otpToken is important in order to verify and resend the otp.
+
+`POST /api/v1/public/auth/verify-otp?phone=1234567890&token=otpsessiontoken`
+send phone & token as query parameter
+
+response data
+
+```json
+{
+   "status": "pending || verified || expired",
+   "otpToken": "otp session token",
+   "sessionToken": "unique session token"
+}
+```
+if verification success a session token returned, save that token it will be required for subsequent requests.
+
+`POST /api/v1/public/auth/resend-otp?token=otpsessiontoken`
+send token as query parameter
+
+response data
+
+```json
+{
+   "otpToken": "otp session token",
+   "status": "pending || verified || expired",
+}
+```
+
+`POST /api/v1/public/auth/logout`
+send sessionToken as request header ex- header["sessiontoken"] = "secret-token"
+
+response data status = 200
+
+```json
+{ }
+```
+
+#### Field inspection
+
+`POST /api/v1/public/field-inspection`
+send sessionToken as request header ex- header["sessiontoken"] = "secret-token"
+
+request data
+
+```json
+[
+   {
+      "department": "department uuid",
+      "scheme": "scheme uuid",
+      "remarks": "this is my remark",
+      "placeName": "place name",
+      "latitude": 12.324321,
+      "longitude": 73.56442,
+      "areaId": "area uuid",
+      "areaType": "rural || urban",
+      "photo": ["url 1", "url 2", "url 3"]
+   }
+]
+```
+
+response data
+
+```json
+[
+   {
+      "id": "unique uuid",
+      "createdAt": "2021-02-27T06:30:35.509Z",
+      "departmentName": "department name",
+      "departmentId": "department uuid",
+      "schemeName": "scheme name",
+      "schemeId": "scheme uuid",
+      "placeName": "place name",
+      "lat": 12.345545,
+      "lng": 82.54534,
+      "remarks": "this is remark",
+      "areaType": "rural || urban",
+      "areaId": "area uuid",
+      "userId": "user uuid",
+      "userFullName": "firstname lastname",
+      "photo": ["url 1", "url 2", "url 3"]
+   }
+]
+```
+
+
+#### Scheme - Department - Area
+
+`POST /api/v1/public/misc/schemes`
+send sessionToken as request header ex- header["sessiontoken"] = "secret-token"
+
+request data
+
+```json
+[
+   {
+      "name":"scheme name",
+      "description":"this is description"
+   }
+]
+```
+
+response data
+
+```json
+[
+   {
+      "id":"unique uuid",
+      "name":"scheme name",
+      "description":"this is description",
+      "createdAt":"2021-02-27T06:30:35.509Z"
+   }
+]
+```
+
+`GET /api/v1/public/misc/departments`
+response
+
+```json
+[
+   {
+      "id":"unique uuid",
+      "name":"department name",
+      "description":"this is description",
+      "createdAt":"2021-02-27T06:30:35.509Z"
+   }
+]
+```
+
+`GET /api/v1/public/misc/schemes`
+response
+
+```json
+[
+   {
+      "id":"unique uuid",
+      "name":"scheme name",
+      "description":"this is description",
+      "createdAt":"2021-02-27T06:30:35.509Z"
+   }
+]
+```
+
+`GET /api/v1/public/misc/areas?type=rural||urban`
+query parameter type = rural or urban only one at a time
+
+response
+
+```json
+[
+   {
+      "id":"unique uuid",
+      "createdAt":"2021-02-27T06:30:35.509Z",
+      "updatedAt":"2021-02-27T06:30:35.509Z",
+      "tehsilName":"name of tehsil",
+      "blockName":"name of block",
+      "gramSabha":"gram sabha name",
+      "bhulekhNumber":123,
+      "census01Code":43,
+      "revenueVillName":"rajaswa gram name",
+      "relatedStation":"sambandhit thana",
+      "relatedAssembly":"sambandhit vidhan sabha"
+   }
+]
+```
+
+
+# Delete rows
 
 #### to delete any above data just send ``DELETE`` request with query parameter ``?id=asesad,qewesad,wq3sdc`` id must be seperated by comma if there is multiple deletion.
 
