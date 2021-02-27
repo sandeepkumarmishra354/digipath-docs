@@ -1,5 +1,7 @@
 # digipath-docs
 
+### Get single user list
+
 ``GET /api/v1/admin/user``</br>
 response</br>
 ``[
