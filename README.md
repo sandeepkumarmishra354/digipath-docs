@@ -26,7 +26,7 @@ response
 
 ### Get single user info
 
-`GET /api/v1/admin/user/:userId`
+`GET /api/v1/admin/user/:userId`\
 userId = "user's unique uuid"
 response
 
