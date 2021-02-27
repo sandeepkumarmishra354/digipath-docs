@@ -1,7 +1,7 @@
 # digipath-docs
 
-``GET /api/v1/admin/user``
-response
+``GET /api/v1/admin/user``</br>
+response</br>
 ``[
 id: "unique uuid",
 createdAt: "2021-02-27T06:30:35.509Z",
